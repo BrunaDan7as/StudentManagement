@@ -1,8 +1,10 @@
-﻿namespace StudentManagement.Domain.Models
+﻿using StudentManagement.Domain.Models.Base;
+
+namespace StudentManagement.Domain.Models
 {
-    public class UserModel
+    public class UserModel : BaseModel
     {
-        public int Id { get; set; }
+
         public string Username { get; set; }
         public string Password { get; set; }
     }
