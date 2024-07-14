@@ -5,12 +5,8 @@ import Login from '../../../components/Login';
 
 
 
-
-const SignIn = ({ onLogin }: { onLogin: (userData: userModel) => void }) => {
-
-  return (
-    <Login onLogin={onLogin}/>
-  );
-}
+const SignIn: React.FC = () => {
+  return <Login />;
+};
 
 export default SignIn;

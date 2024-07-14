@@ -1,28 +1,25 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userModel } from "../../models/userModal";
+import { useUser } from "../../context/UserContext";
 
-const Login = ({ onLogin }: { onLogin: (userData: userModel) => void }) => {
-    const [user, setUser] = useState('');
-    const [password, setPassword] = useState('');
-  
-    const navigate = useNavigate()
-    const handleSubmit = (event: { preventDefault: () => void; }) => {
-   
-      event.preventDefault();
-  
-      // const request = {
-      //   user: user,
-      //   toke: password,
-      // } as userModel;
-  
-      const userData: userModel = {
-        user: user,
-        token: password,
-      };
-      onLogin(userData)
-      navigate('/home'); 
+const Login: React.FC = () => {
+  const [user, setUser] = useState('');
+  const [password, setPassword] = useState('');
+  const { login } = useUser(); // Usar a função login do contexto
+  const navigate = useNavigate();
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    
+    const userData: userModel = {
+      user: user,
+      token: password,
     };
+    
+    login(userData); // Chamar a função login do contexto
+    navigate('/home'); 
+  };
   
     
   
