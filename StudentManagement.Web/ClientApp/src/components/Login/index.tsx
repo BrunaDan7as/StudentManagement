@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { userModel } from "../../models/userModal";
+import { authenticationRequest, userModel } from "../../models/userModal";
 import { useUser } from "../../context/UserContext";
+import userService from "../../services/user/userService";
+import { toast } from "react-toastify";
 
 const Login: React.FC = () => {
   const [user, setUser] = useState('');
@@ -11,14 +13,36 @@ const Login: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    
+    const request ={ password : password , user : user} as authenticationRequest
     const userData: userModel = {
-      user: user,
-      token: password,
-    };
-    
-    login(userData); // Chamar a função login do contexto
-    navigate('/home'); 
+            user: user,
+            token: password,
+          };
+    login(userData);
+        navigate('/home'); 
+    // userService
+    //   .login(request)
+    //   .then((response: any) => {
+    //     const userData: userModel = {
+    //       user: response.data.user,
+    //       token: response.data.token,
+    //     };
+        
+    //   })
+    //   .catch((err) => {
+    //     const { errors } = err.response.data;
+    //     if (errors !== undefined) {
+    //       Object.entries(errors).forEach(([key, value]) => {
+    //         setPassword('')
+    //         setUser('')        
+    //         // Aqui você pode fazer o tratamento dinâmico para cada propriedade de erro
+    //         toast.error(`${value}`, {
+    //           className: "toast-error",
+    //         });
+    //       });
+    //     }
+    //   });
+   
   };
   
     

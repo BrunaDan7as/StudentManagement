@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.35.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.35.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StudentManagement.DataTransferObject\StudentManagement.DataTransferObject.csproj" />
+    <ProjectReference Include="..\StudentManagement.Domain\StudentManagement.Domain.csproj" />
   </ItemGroup>
 
 </Project>
