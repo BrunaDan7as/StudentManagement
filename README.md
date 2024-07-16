@@ -28,33 +28,57 @@ Este é um projeto de gerenciamento de estudantes, desenvolvido utilizando uma a
 # Estrutura do Projeto
 
 ```plaintext
-/StudentManagement
-  ├── 1 - Web
-  │   └── StudentManagement.Web
-  │       ├── ClientApp
-  │       │   ├── public
-  │       │   └── src
-  │       │       ├── components
-  │       │       ├── context
-  │       │       ├── models
-  │       │       ├── pages
-  │       │       ├── services
-  │       │       └── styles
-  │       ├── package.json
-  │       └── README.md
-  ├── 2 - Application
-  │   └── StudentManagement.Application
-  │       └── Services
-  ├── 3 - Domain
-  │   └── StudentManagement.Domain
-  │       ├── Interfaces
-  │       │   ├── Repositories
-  │       │   └── Services
-  │       └── Models
-  ├── 4 - Infrastructure
-  ├── 5 - Framework
-  └── 6 - TDD
+# Estrutura do Projeto
 
+/StudentManagement
+  /1 - Web
+    /StudentManagement.Web
+      /Controllers
+      Program.cs
+      /ClientApp
+        /public
+        /src
+          /components
+          /context
+          /models
+          /pages
+          /services
+          /styles
+        package.json
+        README.md
+        
+  /2 - Application
+    /StudentManagement.Application
+      /Services
+        /Authentication
+        
+  /3 - Domain
+    /StudentManagement.Domain
+      /Interfaces
+        /Repositories
+        /Services
+      /Models
+      
+  /4 - Infrastructure
+    /StudentManagement.DependencyInjection
+    /StudentManagement.Infrastructure
+      /Context
+      /Map
+      /Repository
+		
+  /5 - Framework
+    /StudentManagement.DataTransferObject
+      /Authentication
+        /Request
+        /Response
+      /Student
+        /Request
+        /Response
+        
+  /6 - TDD
+    /StudentManagement.Tests
+      StudentTests.cs
+````
 ## Instalação
 
 1. Clone o repositório:
@@ -115,15 +139,17 @@ dotnet test
 
 - .NET Core SDK
 - Node.js
-
+````
 
 
 ##Explicação de Cada Tecnologia
-Backend:
+
+###Backend:
 
 ASP.NET Core: Um framework de desenvolvimento web de código aberto e multiplataforma.
 Entity Framework Core: Um ORM (Object-Relational Mapper) para .NET que permite trabalhar com um banco de dados usando objetos .NET.
-Frontend:
+
+###Frontend:
 
 React: Uma biblioteca JavaScript para construção de interfaces de usuário.
 Bootstrap: Um framework CSS para desenvolvimento de interfaces responsivas e modernas.
