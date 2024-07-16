@@ -11,7 +11,7 @@ Sumário
 8. Testes
 9. Explicação de Cada Tecnologia
 
-##Introdução
+## Introdução
 
 Este é um projeto de gerenciamento de estudantes, desenvolvido utilizando uma arquitetura baseada em MVC e DDD. O projeto inclui autenticação JWT, testes unitários, documentação de API com Swagger e um front-end em React.
 
