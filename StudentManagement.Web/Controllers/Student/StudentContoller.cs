@@ -9,11 +9,11 @@ namespace StudentManagement.Web.Controllers.Student
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class StudentContoller : Controller
+    public class StudentController : Controller
     {
         private IStudentService _studentService;
 
-        public StudentContoller(IStudentService studentService)
+        public StudentController(IStudentService studentService)
         {
             _studentService = studentService;
         }
@@ -65,24 +65,27 @@ namespace StudentManagement.Web.Controllers.Student
         {
             try
             {
-                var newStudent = new StudentModel();
-                newStudent.Nome = request.Nome;
-                newStudent.Idade = request.Idade;
-                newStudent.Serie = request.Serie;
-                newStudent.NotaMedia = request.NotaMedia;
-                newStudent.Endereco = request.Endereco;
-                newStudent.NomePai = request.NomePai;
-                newStudent.NomeMae = request.NomeMae;
-                newStudent.DataNascimento = request.DataNascimento;
-                var response = _studentService.AddStudent(newStudent);
-                return Created("students", response);
+                var newStudent = new StudentModel
+                {
+                    Nome = request.Nome,
+                    Idade = request.Idade,
+                    Serie = request.Serie,
+                    NotaMedia = request.NotaMedia,
+                    Endereco = request.Endereco,
+                    NomePai = request.NomePai,
+                    NomeMae = request.NomeMae,
+                    DataNascimento = request.DataNascimento
+                };
+
+                var createdStudent = _studentService.AddStudent(newStudent);
+
+                // Retorna um CreatedAtActionResult com a rota "students" e o objeto criado
+                return CreatedAtAction("students", new { id = createdStudent.Id }, createdStudent);
             }
             catch (Exception ex)
             {
                 return BadRequest($"Ocorreu um erro na inserção: {ex.Message}");
-
             }
-            
         }
 
         /// <summary>

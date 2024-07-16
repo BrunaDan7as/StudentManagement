@@ -15,6 +15,6 @@ namespace StudentManagement.DataTransferObject.Student.Request
         public string Endereco { get; set; }
         public string NomePai { get; set; }
         public string NomeMae { get; set; }
-        public DateTime? DataNascimento { get; set; }
+        public DateTime DataNascimento { get; set; }
     }
 }
