@@ -19,73 +19,35 @@ namespace StudentManagement.Infrastructure.Repository
     public class StudentRepository : RepositoryBase<StudentModel, long>, IStudentRepository
     {
         private StudentContext _context;
-        private string _csvFile;
-        public StudentRepository(StudentContext context, IConfiguration appSettings
+        //private string _csvFile;
+        public StudentRepository(
+            StudentContext context,
+            IConfiguration appSettings
             ) : base(context)
         {
             _context = context;
-            _csvFile = appSettings.GetConnectionString("CsvFilePath");
+            //_csvFile = appSettings.GetConnectionString("CsvFilePath");
         }
 
-        public void LoadCsvDataIntoDatabase()
-        {
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                Delimiter = ";", // Define o delimitador como vírgula
-                HasHeaderRecord = true, // Indica que não há cabeçalho no CSV
-                Quote = '"', // Define o caractere de citação (aspas)
-                TrimOptions = TrimOptions.Trim, // Trim para remover espaços em branco extras
-            };
+        //public void LoadCsvDataIntoDatabase()
+        //{
+        //    var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+        //    {
+        //        Delimiter = ";",
+        //        HasHeaderRecord = true, 
+        //        Quote = '"', 
+        //        TrimOptions = TrimOptions.Trim, 
+        //    };
 
-            using (var reader = new StreamReader(_csvFile))
-            using (var csv = new CsvReader(reader, config))
-            {
-                csv.Context.RegisterClassMap<StudentMap>();
-                var records = csv.GetRecords<StudentModel>().ToList();
+        //    using (var reader = new StreamReader(_csvFile))
+        //    using (var csv = new CsvReader(reader, config))
+        //    {
+        //        csv.Context.RegisterClassMap<StudentMap>();
+        //        var records = csv.GetRecords<StudentModel>().ToList();
 
-                foreach (var record in records)
-                {
-                    Console.WriteLine($"Id: {record.Id}, Nome: {record.Nome}, Idade: {record.Idade}, Serie: {record.Serie}, Nota Média: {record.NotaMedia}, Endereço: {record.Endereco}, Nome do Pai: {record.NomePai}, Nome da Mãe: {record.NomeMae}, Data de Nascimento: {record.DataNascimento}, Criado em: {record.CreatedAt}, Atualizado em: {record.UpdatedAt}");
-                }
-
-                // Aqui você pode inserir os registros no banco de dados usando Entity Framework Core ou outra tecnologia
-            }
-
-            //using (var csv = new CsvReader(reader, config))
-            //{
-            //    var records = new List<StudentModel>();
-
-            //    while (csv.Read())
-            //    {
-            //        var teste = csv.GetField<int>(0);
-            //        var record = new StudentModel
-            //        {
-            //            Id = csv.GetField<int>(0),
-            //            Nome = csv.GetField<string>(1),
-            //            Idade = csv.GetField<int>(2),
-            //            Serie = csv.GetField<int>(3),
-            //            NotaMedia = csv.GetField<double>(4),
-            //            Endereco = csv.GetField<string>(5),
-            //            NomePai = csv.GetField<string>(6),
-            //            NomeMae = csv.GetField<string>(7),
-            //            // DataNascimento = csv.GetField<DateTime>(8), // Exemplo de como lidar com datas se necessário
-            //        };
-
-            //        records.Add(record);
-            //    }
-
-            //// Reiniciar o leitor de stream e o CsvReader para a leitura real
-            //reader.BaseStream.Seek(0, SeekOrigin.Begin);
-            //reader.DiscardBufferedData();
-
-            //csv.Context.RegisterClassMap<StudentMap>(); // Registrando o ClassMap personalizado
-            //var students = csv.GetRecords<object>().ToList();
-
-
-
-            //_context.Students.AddRange(students);
-            _context.SaveChanges();
-            
-        }
+        //        _context.Students.AddRange(records);
+        //        _context.SaveChanges();
+        //    }
+        //}
     }
 }

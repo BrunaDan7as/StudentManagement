@@ -22,15 +22,19 @@ namespace StudentManagement.Infrastructure.Repository.Base
         public TEntity Add(TEntity entidade)
         {
             _context.Set<TEntity>().Add(entidade);
+            _context.SaveChanges();
             return entidade;
         }
+        
         public void Delete(TEntity entidade)
         {
             _context.Set<TEntity>().Remove(entidade);
+            _context.SaveChanges();
         }
         public TEntity Update(TEntity entidade)
         {
             _context.Entry(entidade).State = EntityState.Modified;
+            _context.SaveChanges();
             return entidade;
         }
         public bool Exists(Func<TEntity, bool> where) => _context.Set<TEntity>().Any(where);
@@ -46,6 +50,8 @@ namespace StudentManagement.Infrastructure.Repository.Base
             foreach (var property in includeProperties) query = query.Include(property);
             return query;
         }
+
+        public TEntity GetBy(Func<TEntity, bool> where, params Expression<Func<TEntity, object>>[] includeProperties) => List(includeProperties).FirstOrDefault(where);
         public void Dispose() => _context.Dispose();
     }
 }

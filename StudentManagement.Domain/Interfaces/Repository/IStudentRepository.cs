@@ -10,6 +10,6 @@ namespace StudentManagement.Domain.Interfaces.Repository
 {
     public interface IStudentRepository : IRepositoryBase<StudentModel,long>
     {
-        void LoadCsvDataIntoDatabase();
+        //void LoadCsvDataIntoDatabase();
     }
 }

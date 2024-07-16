@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StudentManagement.Application.Services;
+using StudentManagement.Application.Services.Authentication;
 using StudentManagement.Domain.Interfaces.Repository;
 using StudentManagement.Domain.Interfaces.Services;
 using StudentManagement.Infrastructure.Context;
@@ -49,6 +50,7 @@ namespace DependencyInjection
         private static void RegisterServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<IStudentService, StudentService>();
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
         }
 
     }
