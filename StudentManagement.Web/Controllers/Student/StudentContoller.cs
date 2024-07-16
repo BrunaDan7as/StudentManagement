@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StudentManagement.DataTransferObject.Authentication.Request;
 using StudentManagement.DataTransferObject.Student.Request;
 using StudentManagement.Domain.Interfaces.Services;
@@ -7,6 +8,7 @@ namespace StudentManagement.Web.Controllers.Student
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class StudentContoller : Controller
     {
         private IStudentService _studentService;

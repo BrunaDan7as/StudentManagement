@@ -4,6 +4,7 @@ using CsvHelper.TypeConversion;
 using StudentManagement.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,7 +44,7 @@ namespace StudentManagement.Infrastructure.Map
     {
         public override object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData)
         {
-            return double.TryParse(text, out var result) ? result : 0.0;
+            return double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out var result) ? result : 0.0;
         }
     }
 

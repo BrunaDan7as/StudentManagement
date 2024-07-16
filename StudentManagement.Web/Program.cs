@@ -11,33 +11,77 @@ using StudentManagement.Infrastructure.Map;
 using StudentManagement.Infrastructure.Repository;
 using System.Globalization;
 using System.Text;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 // Configuração do Swagger
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Students API", Version = "v1" });
-});
+
+
 
 builder.Services.AddCors();
 builder.Services.AddControllers();
+
 DependencyRegistration.RegisterDependencies(builder.Services, builder.Configuration);
+
+var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("Jwt")
+                                                       .GetSection("Key").Value);
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Students API", Version = "v1" });
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        // mensagem de texto paddano pro usuario entender como utilizar o token
+        Description = @"JWT Authorization está utilizando o Bearer
+                      Escreva Bearer [espaço] [token]
+                      Example: 'Bearer 12345abcdef'",
+        Name = "Authorization",
+        // informando que o token vai ser passado no header
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+                Scheme = "oauth2",
+                Name = "Bearer",
+                In = ParameterLocation.Header
+            },
+            new List<string>()
+        }
+    });
+});
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Bearer", policy =>
+    {
+        policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+        policy.RequireAuthenticatedUser();
+    });
+});
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
-
 .AddJwtBearer(options =>
 {
-    var jwtSettings = builder.Configuration.GetSection("Jwt");
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = false,
         ValidateAudience = false,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]))
+        IssuerSigningKey = new SymmetricSecurityKey(key),
     };
 });
 
@@ -64,7 +108,7 @@ using (var scope = app.Services.CreateScope())
     using (var reader = new StreamReader(csvFile))
     using (var csv = new CsvReader(reader, config))
     {
-        csv.Context.RegisterClassMap<StudentMap>(); // Substitua StudentMap pelo seu mapeamento de CSV
+        csv.Context.RegisterClassMap<StudentMap>(); 
         var records = csv.GetRecords<StudentModel>().ToList();
 
         // Adicionar os registros ao contexto do banco de dados
@@ -75,24 +119,13 @@ using (var scope = app.Services.CreateScope())
 
 
 
-
-
-// Habilita o Swagger e o Swagger UI
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Minha API v1");
-    c.RoutePrefix = string.Empty; // Define a raiz do Swagger UI como a raiz do aplicativo
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Students API v1");
+    c.RoutePrefix = string.Empty;
 });
 
-
-//using (var scope = app.Services.CreateScope())
-//{
-//    //var csvService = scope.ServiceProvider.GetRequiredService<StudentRepository>();
-//    //csvService.LoadCsvDataIntoDatabase();
-//    var studentRepository = scope.ServiceProvider.GetRequiredService<IStudentRepository>();
-//    studentRepository.LoadCsvDataIntoDatabase();
-//}
 app.UseCors(x => x
             .AllowAnyOrigin()
             .AllowAnyMethod()
@@ -100,7 +133,10 @@ app.UseCors(x => x
 
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
+
+
 
 app.MapControllers();
 app.UseEndpoints(endpoints =>
