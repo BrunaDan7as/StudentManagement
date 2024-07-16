@@ -28,7 +28,7 @@ Este é um projeto de gerenciamento de estudantes, desenvolvido utilizando uma a
 # Estrutura do Projeto
 
 ```plaintext
-# Estrutura do Projeto
+
 
 /StudentManagement
   /1 - Web
@@ -122,7 +122,7 @@ Este é um projeto de gerenciamento de estudantes, desenvolvido utilizando uma a
 - **JWT**: Utilizado para autenticação e autorização.
 - **Swagger**: Para documentação da API.
 
-##Autenticação e Autorização
+## Autenticação e Autorização
 
 A autenticação e autorização são implementadas utilizando JWT (JSON Web Tokens) usado para autenticar usuários em um sistema e o JWT Bearer que permite que os tokens JWT sejam usados para autenticação(nesse caso no Swagger). Esta abordagem permite que a aplicação proteja endpoints de forma eficiente e segura.
 
