@@ -146,18 +146,18 @@ dotnet test
 
 ### Backend:
 
-ASP.NET Core: Um framework de desenvolvimento web de código aberto e multiplataforma.
-Entity Framework Core: Um ORM (Object-Relational Mapper) para .NET que permite trabalhar com um banco de dados usando objetos .NET.
+- **ASP.NET Core**: Um framework de desenvolvimento web de código aberto e multiplataforma.
+- **Entity Framework Core**: Um ORM (Object-Relational Mapper) para .NET que permite trabalhar com um banco de dados usando objetos .NET.
 
 ### Frontend:
 
-React: Uma biblioteca JavaScript para construção de interfaces de usuário.
-Bootstrap: Um framework CSS para desenvolvimento de interfaces responsivas e modernas.
-Sass: Um pré-processador CSS que permite utilizar funcionalidades como variáveis, aninhamento e mixins.
-Context API: Uma API do React para gerenciar o estado global da aplicação.
-Axios: Uma biblioteca para fazer requisições HTTP.
-react-bootstrap: Componentes do Bootstrap desenvolvidos especificamente para o React.
-dayjs: Uma biblioteca JavaScript para manipulação e formatação de datas.
+- **React**: Uma biblioteca JavaScript para construção de interfaces de usuário.
+- **Bootstrap**: Um framework CSS para desenvolvimento de interfaces responsivas e modernas.
+- **Sass**: Um pré-processador CSS que permite utilizar funcionalidades como variáveis, aninhamento e mixins.
+- **Context API**: Uma API do React para gerenciar o estado global da aplicação.
+- **Axios**: Uma biblioteca para fazer requisições HTTP.
+- **react-bootstrap**: Componentes do Bootstrap desenvolvidos especificamente para o React.
+- **dayjs**: Uma biblioteca JavaScript para manipulação e formatação de datas.
 Autenticação:
 
 JWT (JSON Web Tokens): Um padrão aberto para criação de tokens de acesso que permitem a autenticação entre diferentes partes de um sistema.
