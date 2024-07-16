@@ -160,19 +160,19 @@ dotnet test
 - **dayjs**: Uma biblioteca JavaScript para manipulação e formatação de datas.
 Autenticação:
 
-JWT (JSON Web Tokens): Um padrão aberto para criação de tokens de acesso que permitem a autenticação entre diferentes partes de um sistema.
+- **JWT (JSON Web Tokens)**: Um padrão aberto para criação de tokens de acesso que permitem a autenticação entre diferentes partes de um sistema.
 Testes:
 
-xUnit: Um framework para criação de testes unitários em .NET.
+- **xUnit**: Um framework para criação de testes unitários em .NET.
 Documentação:
 
-Swagger: Uma ferramenta para documentação de APIs que permite testar endpoints diretamente na interface web.
+- **Swagger**: Uma ferramenta para documentação de APIs que permite testar endpoints diretamente na interface web.
 Banco de Dados:
 
-Em memória com EF Core: Utilização do Entity Framework Core para trabalhar com um banco de dados em memória, populado a partir de um documento CSV.
+- **Em memória com EF Core**: Utilização do Entity Framework Core para trabalhar com um banco de dados em memória, populado a partir de um documento CSV.
 Gerenciador de Pacotes:
 
-Node.js: Uma plataforma JavaScript utilizada para executar código fora do navegador, geralmente usada para gerenciar pacotes e dependências do frontend.
+- **Node.js**: Uma plataforma JavaScript utilizada para executar código fora do navegador, geralmente usada para gerenciar pacotes e dependências do frontend.
 
 
 
