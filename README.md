@@ -27,7 +27,7 @@ Este é um projeto de gerenciamento de estudantes, desenvolvido utilizando uma a
 
 # Estrutura do Projeto
 
-```plaintext
+````plaintext
 
 
 /StudentManagement
@@ -142,14 +142,14 @@ dotnet test
 ````
 
 
-##Explicação de Cada Tecnologia
+## Explicação de Cada Tecnologia
 
-###Backend:
+### Backend:
 
 ASP.NET Core: Um framework de desenvolvimento web de código aberto e multiplataforma.
 Entity Framework Core: Um ORM (Object-Relational Mapper) para .NET que permite trabalhar com um banco de dados usando objetos .NET.
 
-###Frontend:
+### Frontend:
 
 React: Uma biblioteca JavaScript para construção de interfaces de usuário.
 Bootstrap: Um framework CSS para desenvolvimento de interfaces responsivas e modernas.
