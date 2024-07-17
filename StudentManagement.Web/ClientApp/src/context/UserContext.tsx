@@ -1,6 +1,7 @@
 // UserContext.tsx
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { userModel } from '../models/userModal';
+import api from '../services/api';
 
 
 interface UserContextProps {
@@ -23,6 +24,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     const users = localStorage.getItem('@Ubc:user');
     if (token !== null && users !== null) {
       setUser({ user: users, token: token });
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
   };
 
@@ -31,7 +33,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     if (userData !== undefined) {
       localStorage.setItem('@Ubc:token', userData?.token);
       localStorage.setItem('@Ubc:user', userData.user);
+      api.defaults.headers.common['Authorization'] = `Bearer ${userData?.token}`;
+
     }
+
   };
 
   const logout = () => {

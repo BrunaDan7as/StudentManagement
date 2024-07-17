@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using StudentManagement.Application.Services;
 using StudentManagement.Application.Services.Authentication;
+using StudentManagement.Domain;
 using StudentManagement.Domain.Interfaces.Repository;
 using StudentManagement.Domain.Interfaces.Services;
 using StudentManagement.Infrastructure.Context;
@@ -51,6 +53,8 @@ namespace DependencyInjection
         {
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.AddTransient<JwtService>(provider =>
+                new JwtService(null, provider.GetRequiredService<ILogger<JwtService>>(),configuration));
         }
 
     }

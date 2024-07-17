@@ -12,6 +12,8 @@ using StudentManagement.Infrastructure.Repository;
 using System.Globalization;
 using System.Text;
 using Microsoft.Extensions.Options;
+using StudentManagement.Domain;
+using Leader.Integration.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 // Configuração do Swagger
@@ -85,6 +87,9 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+
+// Registra o JwtMiddleware como serviço, usando a injeção de dependência
+
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
@@ -92,7 +97,7 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<StudentContext>();
     var configuration = services.GetRequiredService<IConfiguration>();
 
-    // Garante que o banco de dados seja criado e carrega os dados do CSV
+    // Garante que o banco de dados seja criado e carrega os dados do CSV (Readme)
     context.Database.EnsureCreated();
 
     var csvFile = configuration.GetConnectionString("CsvFilePath");
@@ -131,11 +136,11 @@ app.UseCors(x => x
             .AllowAnyMethod()
             .AllowAnyHeader());
 
-app.UseHttpsRedirection();
+app.UseMiddleware<JwtService>();
+app.UseMiddleware<ValidationMiddleware>();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-
 
 
 app.MapControllers();

@@ -1,6 +1,5 @@
-import './styles.scss'; 
-import '../../../styles/global.scss'; 
-import { userModel } from '../../../models/userModal';
+import './styles.scss';
+import '../../../styles/global.scss';
 import Login from '../../../components/Login';
 
 

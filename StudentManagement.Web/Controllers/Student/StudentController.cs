@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using StudentManagement.DataTransferObject.Authentication.Request;
 using StudentManagement.DataTransferObject.Student.Request;
+using StudentManagement.Domain.Authorization;
 using StudentManagement.Domain.Interfaces.Services;
 using StudentManagement.Domain.Models;
 namespace StudentManagement.Web.Controllers.Student
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     [Authorize]
     public class StudentController : Controller
@@ -41,7 +42,7 @@ namespace StudentManagement.Web.Controllers.Student
         [HttpGet("students/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetStudents(int id)
+        public IActionResult GetStudent(int id)
         {
             var response = _studentService.GetStudent(id);
 

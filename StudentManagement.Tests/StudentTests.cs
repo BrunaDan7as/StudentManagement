@@ -116,7 +116,7 @@ namespace StudentManagement.Tests
 
             var _controller = new StudentController(_mockStudentService.Object);
 
-            var result = _controller.GetStudents(studentId) as OkObjectResult;
+            var result = _controller.GetStudent(studentId) as OkObjectResult;
 
             Assert.NotNull(result);
             Assert.Equal(200, result.StatusCode);

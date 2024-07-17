@@ -1,6 +1,7 @@
 export interface studentModel {
     id: number
     nome: string
+    endereco: string
     idade: number
     serie: number
     notaMedia: number

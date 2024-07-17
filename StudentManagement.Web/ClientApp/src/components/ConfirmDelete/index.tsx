@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Modal, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
 
 interface ConfirmationModalProps {
@@ -33,9 +34,14 @@ const DeleteButtonConfirm: React.FC<MyComponentProps> = ({ onConfirmationAction 
         setIsModalOpen(false);
     };
 
-    const handleConfirm = () => {
+    const handleConfirm = async () => {
         handleCloseModal();
-        onConfirmationAction();
+        try {
+            await onConfirmationAction();
+            toast.success('Estudante excluído com sucesso!');
+        } catch (error) {
+            toast.error('Falha ao excluir o estudante.');
+        }
     };
 
     const handleCancel = () => {
@@ -45,8 +51,8 @@ const DeleteButtonConfirm: React.FC<MyComponentProps> = ({ onConfirmationAction 
     return (
         <div>
             <Button variant="danger" size="sm" onClick={handleOpenModal}>
-          Excluir
-        </Button>
+                Excluir
+            </Button>
 
             <Modal
                 size="sm"

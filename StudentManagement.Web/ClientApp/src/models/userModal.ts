@@ -3,6 +3,6 @@ user:string,
 token:string
 }
 export interface authenticationRequest {
-    user:string,
+    username:string,
     password:string
     }

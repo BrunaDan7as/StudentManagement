@@ -2,51 +2,53 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authenticationRequest, userModel } from "../../models/userModal";
 import { useUser } from "../../context/UserContext";
-import userService from "../../services/user/userService";
+
 import { toast } from "react-toastify";
+import { authentication } from "../../services/user/userService";
 
 const Login: React.FC = () => {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useUser(); // Usar a função login do contexto
+  const { login } = useUser(); 
   const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    const request ={ password : password , user : user} as authenticationRequest
-    const userData: userModel = {
-            user: user,
-            token: password,
-          };
-    login(userData);
+
+    const request ={ password : password , username : user} as authenticationRequest
+    
+        authentication(request)
+      .then((response: any) => {
+        const userData: userModel = {
+          user: response.data.username,
+          token: response.data.token,
+        };
+        login(userData);
         navigate('/home'); 
-    // userService
-    //   .login(request)
-    //   .then((response: any) => {
-    //     const userData: userModel = {
-    //       user: response.data.user,
-    //       token: response.data.token,
-    //     };
-        
-    //   })
-    //   .catch((err) => {
-    //     const { errors } = err.response.data;
-    //     if (errors !== undefined) {
-    //       Object.entries(errors).forEach(([key, value]) => {
-    //         setPassword('')
-    //         setUser('')        
-    //         // Aqui você pode fazer o tratamento dinâmico para cada propriedade de erro
-    //         toast.error(`${value}`, {
-    //           className: "toast-error",
-    //         });
-    //       });
-    //     }
-    //   });
+        toast.success('Logado com sucesso!');
+      })
+      .catch((err: any) => {
+        console.error(err);
+ 
+        toast.error('Dados não autorizados.', {
+          className: 'toast-error',
+        });
+
+        const { errors } = err.response?.data || {};
+        if (errors !== undefined) {
+          Object.entries(errors).forEach(([key, value]) => {
+            setPassword('');
+            setUser('');
+            toast.error(`${value}`, {
+              className: 'toast-error',
+            });
+          });
+        }
+      });
    
   };
   
-    
-  
+
     return (
       <section className="sign-in-section">
         <div className="container py-5 h-100">

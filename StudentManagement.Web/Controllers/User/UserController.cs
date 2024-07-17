@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StudentManagement.DataTransferObject.Authentication.Request;
 using StudentManagement.Domain.Interfaces.Services;
@@ -6,8 +7,9 @@ using System.Reflection;
 
 namespace StudentManagement.Web.Controllers.User
 {
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
+    [AllowAnonymous]
     public class UserController : Controller
     {
         private IAuthenticationService _authenticationService;
@@ -18,6 +20,7 @@ namespace StudentManagement.Web.Controllers.User
         }
 
         [HttpPost("login")]
+
         public IActionResult Login(AuthenticationRequest authenticationRequest)
         {
             var response = _authenticationService.Authenticate(authenticationRequest);
