@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StudentManagement.DataTransferObject.Authentication.Request;
 using StudentManagement.Domain.Interfaces.Services;
-using System.Reflection;
 
 namespace StudentManagement.Web.Controllers.User
 {

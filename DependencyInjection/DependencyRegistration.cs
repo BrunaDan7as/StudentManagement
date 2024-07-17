@@ -4,16 +4,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using StudentManagement.Application.Services;
 using StudentManagement.Application.Services.Authentication;
-using StudentManagement.Domain;
 using StudentManagement.Domain.Interfaces.Repository;
 using StudentManagement.Domain.Interfaces.Services;
 using StudentManagement.Infrastructure.Context;
 using StudentManagement.Infrastructure.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 
 namespace DependencyInjection
@@ -29,15 +24,9 @@ namespace DependencyInjection
         }
         private static void RegisterDatas(IServiceCollection services, IConfiguration configuration)
         {
-            //services.AddScoped<IConnectionFactory, SqlServerConnectionFactory>(x => new SqlServerConnectionFactory(configuration["ConnectionStrings:SqlServer"]));
+
             services.AddDbContext<StudentContext>(options =>
-            options.UseInMemoryDatabase("InMemoryDb"));
-
-            //services.AddDbContext<Data.AppContext>(options =>
-            // options.UseSqlServer(
-            //     configuration.GetConnectionString("ConnectionStrings:DevConnection")));
-
-            //Register dapper in scope    
+            options.UseInMemoryDatabase("InMemoryDb"));  
 
         }
         private static void RegisterRepositories(IServiceCollection services)

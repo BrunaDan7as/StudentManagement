@@ -1,9 +1,4 @@
 ﻿using StudentManagement.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StudentManagement.Domain.Interfaces.Services
 {
@@ -17,8 +12,6 @@ namespace StudentManagement.Domain.Interfaces.Services
         StudentModel Delete(int id);
 
         StudentModel GetStudent(int id);
-
-
 
     }
 }

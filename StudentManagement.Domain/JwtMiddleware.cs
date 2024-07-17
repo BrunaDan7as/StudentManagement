@@ -2,11 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using System;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 public class JwtService
 {
@@ -23,7 +20,7 @@ public class JwtService
 
     public async Task InvokeAsync(HttpContext context)
     {
-        // Verifica se o caminho da requisição não é para o endpoint de login
+
         if (!context.Request.Path.Equals("/api/auth/login", StringComparison.OrdinalIgnoreCase))
         {
             var authorizationHeader = context.Request.Headers["Authorization"].FirstOrDefault();
@@ -52,15 +49,13 @@ public class JwtService
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                 }, out SecurityToken validatedToken);
 
-                // Se a validação do token for bem-sucedida, você pode decodificar o token para obter informações do usuário
+
                 var jwtToken = (JwtSecurityToken)validatedToken;
-                // Exemplo: obter o ID do usuário do token
+
                 var userId = jwtToken.Claims.First(x => x.Type == "sub").Value;
 
-                // Definir o usuário no contexto
-                // Exemplo: context.User = ...
                 context.Items["Admin"] = userId;
-                await _next(context); // Chama o próximo middleware no pipeline
+                await _next(context); 
             }
             catch (Exception ex)
             {
@@ -72,7 +67,6 @@ public class JwtService
         }
         else
         {
-            // Se o caminho da requisição for para /login, chama o próximo middleware no pipeline
             await _next(context);
         }
     }

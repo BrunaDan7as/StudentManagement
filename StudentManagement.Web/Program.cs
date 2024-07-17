@@ -4,21 +4,14 @@ using DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using StudentManagement.Domain.Interfaces.Repository;
 using StudentManagement.Domain.Models;
 using StudentManagement.Infrastructure.Context;
 using StudentManagement.Infrastructure.Map;
-using StudentManagement.Infrastructure.Repository;
 using System.Globalization;
 using System.Text;
-using Microsoft.Extensions.Options;
-using StudentManagement.Domain;
 using Leader.Integration.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
-// Configuração do Swagger
-
-
 
 builder.Services.AddCors();
 builder.Services.AddControllers();
@@ -34,12 +27,12 @@ builder.Services.AddSwaggerGen(c =>
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        // mensagem de texto paddano pro usuario entender como utilizar o token
+
         Description = @"JWT Authorization está utilizando o Bearer
                       Escreva Bearer [espaço] [token]
                       Example: 'Bearer 12345abcdef'",
         Name = "Authorization",
-        // informando que o token vai ser passado no header
+
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
         Scheme = "Bearer"
@@ -87,9 +80,6 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-
-// Registra o JwtMiddleware como serviço, usando a injeção de dependência
-
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
@@ -116,7 +106,6 @@ using (var scope = app.Services.CreateScope())
         csv.Context.RegisterClassMap<StudentMap>(); 
         var records = csv.GetRecords<StudentModel>().ToList();
 
-        // Adicionar os registros ao contexto do banco de dados
         context.Students.AddRange(records);
         context.SaveChanges();
     }
@@ -150,7 +139,5 @@ app.UseEndpoints(endpoints =>
             name: "default",
             pattern: "{controller}/{action=Index}/{id?}");
 });
-
-
 
 app.Run();

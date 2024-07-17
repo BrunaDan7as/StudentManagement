@@ -1,11 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.Routing.Patterns;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using StudentManagement.Domain.Interfaces.Services;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Leader.Integration.Authorization
 {

@@ -3,13 +3,9 @@ using Microsoft.IdentityModel.Tokens;
 using StudentManagement.DataTransferObject.Authentication.Request;
 using StudentManagement.DataTransferObject.Authentication.Response;
 using StudentManagement.Domain.Interfaces.Services;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace StudentManagement.Application.Services.Authentication
 {
@@ -25,10 +21,10 @@ namespace StudentManagement.Application.Services.Authentication
         }
         public AuthenticationResponse Authenticate(AuthenticationRequest model)
         {
-            // Validação simples do usuário
+            // Usuario padrão conforme solicitado
             if (model.Username == "admin" && model.Password == "admin")
             {
-                // Gerar o token JWT
+
                 var token = GenerateJwtToken(model.Username);
                 return new AuthenticationResponse
                 {
@@ -37,7 +33,6 @@ namespace StudentManagement.Application.Services.Authentication
                 };
             }
 
-            // Retornar null ou lançar uma exceção caso a autenticação falhe
             return null;
         }
 

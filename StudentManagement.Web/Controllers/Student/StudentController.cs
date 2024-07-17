@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
-using StudentManagement.DataTransferObject.Authentication.Request;
 using StudentManagement.DataTransferObject.Student.Request;
 using StudentManagement.Domain.Authorization;
 using StudentManagement.Domain.Interfaces.Services;
@@ -80,7 +79,6 @@ namespace StudentManagement.Web.Controllers.Student
 
                 var createdStudent = _studentService.AddStudent(newStudent);
 
-                // Retorna um CreatedAtActionResult com a rota "students" e o objeto criado
                 return CreatedAtAction("students", new { id = createdStudent.Id }, createdStudent);
             }
             catch (Exception ex)
@@ -111,7 +109,6 @@ namespace StudentManagement.Web.Controllers.Student
             updateStudent.NomeMae = request.NomeMae;
             updateStudent.DataNascimento = request.DataNascimento;
             var response = _studentService.Update(id, updateStudent);
-
 
             if (response == null)
             {

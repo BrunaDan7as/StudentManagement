@@ -1,11 +1,6 @@
 ﻿using StudentManagement.Domain.Interfaces.Repository;
 using StudentManagement.Domain.Interfaces.Services;
 using StudentManagement.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StudentManagement.Application.Services
 {
@@ -17,8 +12,6 @@ namespace StudentManagement.Application.Services
         {
             _studentRepository = studentRepository;
         }
-
-
 
         public List<StudentModel> GetAllStudents()
         {
@@ -32,7 +25,6 @@ namespace StudentManagement.Application.Services
 
         public StudentModel AddStudent(StudentModel student)
         {
-            // Implementação para adicionar um novo estudante
             _studentRepository.Add(student);
             return student;
         }
