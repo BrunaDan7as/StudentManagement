@@ -81,6 +81,17 @@ Este é um projeto de gerenciamento de estudantes, desenvolvido utilizando uma a
 ````
 ## Instalação
 
+Primeiro baixar os seguintes programas:
+
+Node 20.15.1
+https://nodejs.org/en/download/prebuilt-installer
+
+Git
+https://git-scm.com/downloads
+
+.Net SDK
+https://dotnet.microsoft.com/en-us/download/dotnet/6.0
+
 1. Clone o repositório:
 
     ```sh
@@ -93,7 +104,7 @@ Este é um projeto de gerenciamento de estudantes, desenvolvido utilizando uma a
 4. Navegue até a pasta do frontend e instale as dependências:
 
     ```sh
-    cd ClientApp
+    cd StudentManagement.Web/ClientApp
     npm install
     ```
 ## Como Executar
@@ -101,6 +112,7 @@ Este é um projeto de gerenciamento de estudantes, desenvolvido utilizando uma a
 1. Inicie o backend:
 
     ```sh
+    cd StudentManagement.Web
     dotnet run
     ```
 
@@ -121,6 +133,13 @@ Este é um projeto de gerenciamento de estudantes, desenvolvido utilizando uma a
 - **DDD (Domain-Driven Design)**: Organização do código em domínios específicos.
 - **JWT**: Utilizado para autenticação e autorização.
 - **Swagger**: Para documentação da API.
+
+A escolha da arquitetura foi devido a regra de negócio:
+  Cadastro de Estudantes: Apenas usuários autenticados podem cadastrar novos estudantes no sistema.
+  Edição e Exclusão de Estudantes: Somente o usuário autenticado com permissões adequadas pode editar ou excluir informações de estudantes.
+  Validação de Dados: Garantir que os dados inseridos para criar ou atualizar um estudante sejam válidos de acordo com as regras de negócio estabelecidas (por exemplo, formatos de dados 
+  corretos, validação de campos obrigatórios, etc.).
+  Utilização do Swagger para documentar automaticamente todas as APIs do sistema, facilitando o entendimento e uso por parte dos desenvolvedores e usuários.
 
 ## Autenticação e Autorização
 
