@@ -1,6 +1,6 @@
 # Gerenciamento de Estudantes
 
-Sumário
+## Sumário
 1. Introdução
 2. Tecnologias Utilizadas
 3. Estrutura do Projeto
@@ -99,9 +99,9 @@ https://dotnet.microsoft.com/en-us/download/dotnet/6.0
     cd StudentManagement
     ```
 
-2.O banco de dados em memória já está configurado no `Program.cs` com o context.Database.EnsureCreated(); para que banco de dados seja criado e carregar os dados do CSV.
+2. O banco de dados em memória já está configurado no `Program.cs` com o context.Database.EnsureCreated(); para que banco de dados seja criado e carregar os dados do CSV.
 
-4. Navegue até a pasta do frontend e instale as dependências:
+3. Navegue até a pasta do frontend e instale as dependências:
 
     ```sh
     cd StudentManagement.Web/ClientApp
