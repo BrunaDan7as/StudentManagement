@@ -127,6 +127,11 @@ https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 
     O frontend estará disponível em `http://localhost:44440/`.
 
+a conta padrão é:
+
+usuário: admin
+senha: admin
+
 ## Arquitetura
 
 - **MVC (Model-View-Controller)**: Estrutura básica do projeto backend.
